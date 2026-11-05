@@ -25,3 +25,10 @@ The Minkowski distance shows up whenever you need one knob that interpolates bet
 - `isFiniteNumber(x)` — returns `true` iff `x` is a `number` and finite. Exported so callers can pre-validate inputs with the same rule the library uses.
 
 ESM only. No dependencies.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
